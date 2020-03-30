@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
-import android.text.Html;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -47,36 +44,15 @@ public class MainActivity extends Activity {
             sCalculation += bn.getText();
             number_one += bn.getText();
             numberOne = Double.parseDouble(number_one);
-
-//            if (function_present) {
-//                calculateFunction(function);
-//                return;
-//            }
-            //check root is present
-
+            
+///////////////////////////////////////////////
             switch (current_oprator) {
 
-                case ""://if current oprator is null
+                case "":
                     if (power_present) {
                         temp = Result + Math.pow(numberTwo, numberOne);
                     } else {
                         temp = Result + numberOne;
-                    }
-                    break;
-
-                case "+":
-                    if (power_present) {
-                        temp = Result + Math.pow(numberTwo, numberOne);
-                    } else {
-                        temp = Result + numberOne;
-                    }
-                    break;
-
-                case "-":
-                    if (power_present) {
-                        temp = Result - Math.pow(numberTwo, numberOne);
-                    } else {
-                        temp = Result - numberOne;
                     }
                     break;
 
@@ -100,8 +76,25 @@ public class MainActivity extends Activity {
                         sAnswer = e.getMessage();
                     }
                     break;
+                case "+":
+                    if (power_present) {
+                        temp = Result + Math.pow(numberTwo, numberOne);
+                    } else {
+                        temp = Result + numberOne;
+                    }
+                    break;
+
+                case "-":
+                    if (power_present) {
+                        temp = Result - Math.pow(numberTwo, numberOne);
+                    } else {
+                        temp = Result - numberOne;
+                    }
+                    break;
 
             }
+
+            //////////////////////////////////////////////////////////////////////////
 
             sAnswer = format.format(temp).toString();
             updateCalculation();
@@ -143,10 +136,10 @@ public class MainActivity extends Activity {
 
     public void updateCalculation() {
         calculation.setText(sCalculation);
-        answer.setText(sAnswer);
     }
 
-    public void onClickClear(View v) {
+    public void onClickClear(View v)
+    {
         cleardata();
     }
 
@@ -171,6 +164,9 @@ public class MainActivity extends Activity {
         function_present = false;
         constant_present = false;
         value_inverted = false;
+        answer.setText("");
+
+
     }
 
 
@@ -196,6 +192,8 @@ public class MainActivity extends Activity {
     }
     public void onClickEqual(View view) {
         showresult();
+        answer.setText(sAnswer);
+
     }
 
     public void showresult() {
